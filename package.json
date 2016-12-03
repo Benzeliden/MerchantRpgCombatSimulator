@@ -9,5 +9,8 @@
   },
   "author": "Benzeliden",
   "private": true,
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-static": "^0.7.9"
+  }
 }
