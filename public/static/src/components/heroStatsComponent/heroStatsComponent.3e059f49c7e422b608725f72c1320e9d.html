@@ -1,0 +1,13 @@
+<div ng-if="hero.showDetails">
+    <b>Patk:</b> {{hero.data.patk}} 
+    <b>Matk:</b> {{hero.data.matk}} 
+    <b>Acc: </b> {{hero.data.acc}}  
+    <b>Crit:</b> {{hero.data.crit}} 
+    <b>Hp:  </b> {{hero.data.hp}}   
+    <b>Pdef:</b> {{hero.data.pdef}} 
+    <b>Mdef:</b> {{hero.data.mdef}} 
+</div>
+<div ng-if="!hero.showDetails">
+    <b>Dmg:</b> {{hero.data.patk + hero.data.matk}} <b>Pdef:</b> {{hero.data.pdef}} <b>Mdef:</b> {{hero.data.mdef}}
+</div>
+<a href="javascript:void(0)" ng-click="hero.toogle()">{{hero.showDetails ? 'less' : 'more'}}</a>

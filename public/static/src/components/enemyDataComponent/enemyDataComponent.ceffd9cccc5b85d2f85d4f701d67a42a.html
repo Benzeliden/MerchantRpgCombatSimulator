@@ -1,0 +1,20 @@
+
+<span ng-class="enemy.data.icon" class="ico-enemy"></span>   
+<span class="v-align-super">{{enemy.data.name}}</span>
+<table>
+    <tbody>
+        <tr>
+            <td>Hp : {{enemy.data.hp}}</td>
+            <td>Atk : {{enemy.data.patk}}</td>
+        </tr>  
+        <tr>
+            <td>Def : {{enemy.data.pdef}} ({{enemy.percentArmorFunc(enemy.data.pdef) | number:2}} %)</td>
+            <td>M.Atk : {{enemy.data.matk}} </td>
+        </tr> 
+        <tr>
+            <td>M.Def : {{enemy.data.mdef}} ({{enemy.percentArmorFunc(enemy.data.mdef) | number:2}} %)</td>
+            <td>Eva : {{enemy.data.eva}}</td>
+        </tr>   
+    </tbody>    
+</table>
+<div>Quest size: {{enemy.data.partySize}}</div>

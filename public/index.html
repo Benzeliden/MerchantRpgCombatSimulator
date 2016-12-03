@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>MerchantCalc - Combat calculator for mobile game Merchant</title>
+        <meta name="description" content="Combat calculator for mobile game Merchant">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bundle.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--[if lt IE 9]>
+            <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
+        <![endif]-->
+    </head>
+    <body ng-app="myApp">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <h1 class="title">Merchant calculator</h1>
+                <!--
+                <nav>
+                    <ul>
+                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">nav ul li a</a></li>
+                    </ul>
+                </nav>
+                -->
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+
+                <article>
+                     <uib-tabset >
+                         <uib-tab heading="Setup heroes stats">
+                             
+                            <header>
+                                <h1>Setup stats</h1>
+                                <p>Please setup stats for your heroes</p>
+                            </header>
+                            <section ng-controller="setupController as set">
+                                <h2>Heroes ({{set.heroes.length}} / {{set.maxHeroCount}})</h2>
+                                <h3>Click on hero icon to add hero!</h3>
+                                
+                                <div class="animate-hide" ng-hide = "set.heroes.length == set.maxHeroCount">                            
+                                    <div class="hero-picker" ng-repeat="class in set.availableHeroes track by class.id"
+                                        ng-click="set.addHero(class.id)" title="{{class.fullName}}">
+
+                                        <div class="ico-heroes" ng-class="class.icon"></div>
+                                    </div>                            
+                                </div>
+                                
+                                <div class="animate-repeat" ng-repeat="hero in set.heroes">
+                                    <hr/>
+                                    <div>
+                                        <span class="ico-heroes" ng-class="hero.icon"></span> 
+                                        <span class="v-align-super">{{hero.name}}</span> 
+                                        <span class="icon-pencil" ng-click="set.editHero(hero)"></span>
+                                        <span class="icon-cross" ng-click="set.removeHero(hero.id)"></span>
+                                        <hero-stats data="hero"></hero-stats>
+                                    </div>
+                                </div>
+                            </section>
+                         </uib-tab>
+                         <uib-tab heading="Select enemy">
+                            <section ng-controller="simulationController as sim">
+                                <h2>Explore enemies</h2>                        
+                                <select-enemy on-select="sim.onEnemySelected($event)" hide-info="sim.hideInfo"></select-enemy>
+                                <div ng-if="sim.questData.quest != undefined">
+                                    <h2>Simulate combat</h2>
+                                    <party-picker party="sim.party" quest="sim.questData.quest"></party-picker>
+                                    <div >      
+                                        <div class="animate-repeat" ng-repeat="hero in sim.heroes">
+                                            <hr/>
+                                            <span class="ico-heroes" ng-class="hero.icon"></span> 
+                                            <span class="v-align-super">{{hero.name}} - combat potential {{sim.calcPotential(hero) | number: 2}}</span>
+                                            
+                                        </div>
+                                    </div>
+                                    <button ng-click="sim.go()">Simulate</button>
+                                </div>
+                            </section>
+                         </uib-tab>
+                     </uib-tabset>
+
+
+                </article>
+
+                <aside ng-controller="storageController as aside">
+                    <h3>Note</h3>
+                    <p>It's beta version. Not all features are implemented</p>
+                    <p>{{aside.statusText}}</p>
+                    <div ng-if="aside.isStorageAvailable">
+                        <button ng-click="aside.saveSetup()">Save to local storage</button>
+                        <button ng-click="aside.loadSetup()" ng-enabled="aside.loadActive">Load from local storage</button>
+                    </div>
+                </aside>
+
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <h3>v 0.0.2 - for merchant version 2.18</h3>
+            </footer>
+        </div>
+        
+        <script src="app.js"></script>
+    </body>
+</html>
