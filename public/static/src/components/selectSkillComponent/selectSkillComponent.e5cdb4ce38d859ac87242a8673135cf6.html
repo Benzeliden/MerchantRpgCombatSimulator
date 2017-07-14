@@ -1,0 +1,14 @@
+
+<ui-select ng-model="ctrl.selected" theme="select2" ng-disabled="ctrl.disabled" 
+        style="min-width: 320px;" ng-change="ctrl.onChange()">
+    <ui-select-match placeholder="Select skill...">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="skill in ctrl.skillList track by skill.name | filter: $select.search : myFilter">
+        <!--todo: skill icon <span ng-class="enemy.icon" class="ico-enemy"></span> -->
+        <div style="display:inline-block;vertical-align: super;">
+            <span ng-bind-html="skill.name | highlight: $select.search"></span>
+            <small>                                    
+                AP: <span ng-bind-html="''+skill.apCost"></span>
+            </small>
+        </div>
+    </ui-select-choices>
+</ui-select>
