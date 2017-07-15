@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <title>MerchantCalc - Combat calculator for mobile game Merchant</title>
     <meta name="description" content="Combat calculator for mobile game Merchant">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bundle.css">
+    <link rel="stylesheet" href="bundle.f5c031feb70a6ace4d8a.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--[if lt IE 9]>
             <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
@@ -40,45 +40,9 @@
             <article>
                 <uib-tabset>
                     <uib-tab heading="Solo mage">
-                        <ng-controller ng-controller="soloMageController as smc">
-                            <section>
-                                <h2>Setup mage stats</h2>
-                                <hero-stats-editable hero="smc.mage"></hero-stats-editable>
-
-                            </section>
-                            <section>
-                                <h2>Pick enemy</h2>
-                                <select-enemy on-select="smc.handleEnemySelection($event)" hide-info="!smc.showInfo"></select-enemy>
-                            </section>
-                            <section>
-                                <h2>Pick skills ({{smc.totalAp}} / 20 used):</h2>
-                                <skills-picker hero="smc.mage" skills-changed="smc.skillsChanged(skills, totalAp)"></skills-picker>
-                            </section>
-                            <section ng-if="smc.showInfo">
-                                <h2>Simulate</h2>
-                                <p>Hit chance: {{smc.getHitChance() | number:0}} %</p>
-                                <button ng-click="smc.simulate()">Simulate</button>
-                                <div ng-if="smc.showResult">
-                                    <h3>{{smc.lastSimResult.resultText}}</h3>
-                                    <ul>
-                                        <li>
-                                            Fight result - {{smc.lastSimResult.resultText}}
-                                        </li>
-                                        <li>
-                                            Hp loss - {{smc.lastSimResult.hpLost}}
-                                        </li>
-                                        <li>
-                                            Damage dealt - <b>{{smc.lastSimResult.heroDeal.pdmg}}</b> atk <b>{{smc.lastSimResult.heroDeal.mdmg}}</b> matk 
-                                        </li>
-                                        <li>
-                                            Fight duration - {{smc.lastSimResult.duration}}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </section>
-                        </ng-controller>
+                        <solo-mage></solo-mage>
                     </uib-tab>
-                    <uib-tab heading="Setup party stats">
+                    <uib-tab ng-hide="true" heading="Setup party stats">
 
                         <header>
                             <h1>Setup stats</h1>
@@ -107,7 +71,7 @@
                             </div>
                         </section>
                     </uib-tab>
-                    <uib-tab heading="Select enemy">
+                    <uib-tab ng-hide="true" heading="Select enemy">
                         <section ng-controller="enemyController as ec">
                             <h2>Explore enemies</h2>
                             <select-enemy on-select="ec.handler($event)" hide-info="ec.hideInfo"></select-enemy>
@@ -132,8 +96,10 @@
                             </div>
                         </section>
                     </uib-tab>
+                    <uib-tab heading="Changelog">
+                        <changelog></changelog>
+                    </uib-tab>
                 </uib-tabset>
-
 
             </article>
 
@@ -154,11 +120,11 @@
 
     <div class="footer-container">
         <footer class="wrapper">
-            <h3>v 0.1.3 - for merchant version 2.302</h3>
+            <h3>v 0.1.4 - for merchant version 2.302</h3>
         </footer>
     </div>
 
-    <script src="app.4685469ba2a60f56e080.js"></script>
+    <script src="app.f5c031feb70a6ace4d8a.js"></script>
 </body>
 
 </html>
