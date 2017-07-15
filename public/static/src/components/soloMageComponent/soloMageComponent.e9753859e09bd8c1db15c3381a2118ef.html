@@ -1,0 +1,21 @@
+<section>
+    <h2>Setup mage stats</h2>
+    <hero-stats-editable hero="smc.mage"></hero-stats-editable>
+
+</section>
+<section>
+    <h2>Pick enemy</h2>
+    <select-enemy on-select="smc.handleEnemySelection($event)" hide-info="!smc.showInfo"></select-enemy>
+</section>
+<section>
+    <h2>Pick skills ({{smc.totalAp}} / 20 AP used):</h2>
+    <skills-picker hero="smc.mage" skills-changed="smc.skillsChanged(skills, totalAp)"></skills-picker>
+</section>
+<section ng-if="smc.showInfo">
+    <h2>Simulate</h2>
+    <p>Hit chance: {{smc.getHitChance() | number:0}} %</p>
+    <button ng-click="smc.simulate()">Simulate</button>
+    <div ng-if="smc.showResult">
+        <simulation-result result="smc.lastSimResult"></simulation-result>
+    </div>
+</section>

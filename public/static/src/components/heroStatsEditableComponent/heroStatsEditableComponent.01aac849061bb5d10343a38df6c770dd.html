@@ -1,0 +1,36 @@
+<div class="hero-stat-editable">
+    <label>
+        <span>Level:</span> 
+        <input type="number" min="1" max="50" ng-model="ctrl.hero.level"/>
+    </label>
+    <label>
+        <span>Hp:  </span> 
+        <input type="number" min="0" max="9999" ng-model="ctrl.hero.hp"/>  
+    </label>
+    <label>
+        <span>Patk:</span> 
+        <input type="number" min="0" max="9999" ng-model="ctrl.hero.atk"/>
+    </label>
+    <label>
+        <span>Matk:</span> 
+        <input type="number" min="0" max="9999" ng-model="ctrl.hero.matk"/>
+    </label>
+    <label>
+        <span>Acc: </span> 
+        <input type="number" min="0" max="9999" ng-model="ctrl.hero.acc"/>  
+    </label>
+    <label>
+        <span>Crit:</span> 
+        <input type="number" min="0" max="9999" ng-model="ctrl.hero.crit"/> 
+    </label>
+    <label>
+        <span>Pdef:</span> 
+        <input type="number" min="0" max="9999" ng-model="ctrl.hero.def"/> 
+        ({{ctrl.percentArmorFunc(ctrl.hero.def) | number:2}} %)
+    </label>
+    <label>
+        <span>Mdef:</span> 
+        <input type="number" min="0" max="9999" ng-model="ctrl.hero.mdef"/> 
+        ({{ctrl.percentArmorFunc(ctrl.hero.mdef) | number:2}} %)
+    </label>
+</div>
