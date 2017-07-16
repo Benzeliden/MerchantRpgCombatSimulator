@@ -1,0 +1,43 @@
+<section>
+    <h2>Setup mage stats</h2>
+    <hero-stats-editable hero="smc.mage"></hero-stats-editable>
+
+</section>
+<section>
+    <h2>Pick enemy</h2>
+    <select-enemy on-select="smc.handleEnemySelection($event)" hide-info="!smc.showInfo"></select-enemy>
+</section>
+<section>
+    <h2>Pick skills<span ng-hide="smc.autoPickSkills"> ({{smc.totalAp}} / 20 AP used)</span>:</h2>
+    <label>
+        <input type="checkbox" ng-model="smc.autoPickSkills" > 
+        Auto-pick best rotation 
+    </label>
+    <skills-picker ng-hide="smc.autoPickSkills" hero="smc.mage" skills-changed="smc.skillsChanged(skills, totalAp)"></skills-picker>    
+</section>
+<section ng-if="smc.showInfo">
+    <h2>Simulate</h2>
+    <p>Hit chance: {{smc.getHitChance() | number:0}} %</p>
+    <button ng-click="smc.simulate()">Simulate</button>
+    <div ng-if="smc.showResult">
+        <p ng-if="smc.bigResult.suggestedSkills">
+            Suggested skills:
+            <span>{{smc.bigResult.suggestedSkills[0]}}</span> >
+            <span>{{smc.bigResult.suggestedSkills[1]}}</span> >
+            <span>{{smc.bigResult.suggestedSkills[2]}}</span> >
+            <span>{{smc.bigResult.suggestedSkills[3]}}</span> >
+            <span>{{smc.bigResult.suggestedSkills[4]}}</span>
+        </p>
+        <p ng-if="smc.showAutoPickFailed">
+            Sorry, cannot beat this quest with any skills
+        </p>
+        <simulation-result ng-hide="smc.showAutoPickFailed" result="smc.lastSimResult"></simulation-result>
+    </div>
+    <div ng-if="smc.showResult && smc.showBadResult">
+        If your mage is unlucky with crit result grade may be <b>{{smc.lastSimBadResult.grade}}</b>
+        <details>
+            <summary>More details</summary>
+            <simulation-result result="smc.lastSimBadResult"></simulation-result>  
+        </details>
+    </div>
+</section>
