@@ -13,7 +13,7 @@
         <input type="checkbox" ng-model="smc.autoPickSkills" > 
         Auto-pick best rotation 
     </label>
-    <skills-picker ng-hide="smc.autoPickSkills" hero="smc.mage" skills-changed="smc.skillsChanged(skills, totalAp)"></skills-picker>    
+    <skills-picker ng-hide="smc.autoPickSkills" hero="smc.mage" initial-skills="smc.initialSkills" skills-changed="smc.skillsChanged(skills, totalAp)"></skills-picker>    
 </section>
 <section ng-if="smc.showInfo">
     <h2>Simulate</h2>

@@ -7,7 +7,7 @@
     <title>MerchantCalc - Combat calculator for mobile game Merchant</title>
     <meta name="description" content="Combat calculator for mobile game Merchant">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bundle.e8f00c7501597ec425e8.css">
+    <link rel="stylesheet" href="bundle.9c59f8495d85422d3196.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--[if lt IE 9]>
             <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
@@ -42,7 +42,7 @@
                     <uib-tab heading="Solo mage">
                         <solo-mage></solo-mage>
                     </uib-tab>
-                    <uib-tab ng-hide="true" heading="Setup party stats">
+                    <uib-tab ng-hide="false" heading="Party simulation">
 
                         <header>
                             <h1>Setup stats</h1>
@@ -63,36 +63,35 @@
                                 <hr/>
                                 <div>
                                     <span class="ico-heroes" ng-class="hero.icon"></span>
-                                    <span class="v-align-super">{{hero.name}}</span>
-                                    <span class="icon-pencil" ng-click="set.editHero(hero)"></span>
-                                    <span class="icon-cross" ng-click="set.removeHero(hero.id)"></span>
+                                    <span class="v-align-super">{{hero.name}} - lvl {{hero.level}}</span>
+                                    <span class="v-align-super icon-pencil" ng-click="set.editHero(hero)"></span>
+                                    <span class="v-align-super icon-cross" ng-click="set.removeHero(hero.id)"></span>
                                     <hero-stats data="hero"></hero-stats>
                                 </div>
                             </div>
                         </section>
-                    </uib-tab>
-                    <uib-tab ng-hide="true" heading="Select enemy">
-                        <section ng-controller="enemyController as ec">
-                            <h2>Explore enemies</h2>
-                            <select-enemy on-select="ec.handler($event)" hide-info="ec.hideInfo"></select-enemy>
-
-                            <button ng-if="!ec.hideInfo" ng-click="ec.createSim()">Start simulation</button>
-                        </section>
 
                         <section ng-controller="simulationController as sim">
-                            <div ng-if="sim.questData.quest != undefined">
-                                <h2>Simulate combat</h2>
-                                <party-picker party="sim.party" quest="sim.questData.quest"></party-picker>
-                                <div>
-                                    <enemy-data data="sim.questData.quest"></enemy-data>
-                                    <div class="animate-repeat" ng-repeat="hero in sim.heroes">
-                                        <hr/>
-                                        <span class="ico-heroes" ng-class="hero.icon"></span>
-                                        <span class="v-align-super">{{hero.name}} - combat potential {{sim.calcPotential(hero) | number: 2}}</span>
-
-                                    </div>
+                            <h2>Explore enemies</h2>
+                            <select-enemy on-select="sim.handler($event)" hide-info="sim.hideInfo"></select-enemy>
+                            <div ng-if="sim.currentlySelected != undefined">
+                                <h2>Setup party</h2>
+                                <party-picker party="sim.party" quest="sim.currentlySelected"></party-picker>
+                                <br/>
+                                <div class="animate-repeat" ng-repeat="partyHero in sim.party | filter: sim.heroExists">
+                                    <hr/>
+                                    <span class="ico-heroes" ng-class="partyHero.hero.icon"></span>
+                                    <span class="v-align-super">{{partyHero.hero.name}} - pos {{partyHero.position}}</span>                                    
+                                    <span class="v-align-super">Skills: {{partyHero.skillsStr}}</span>
+                                    <span class="v-align-super icon-pencil" ng-click="sim.editSkills(partyHero)"></span>
+                                    <span class="v-align-super icon-cross" ng-click="sim.removeHero(partyHero)"></span>
                                 </div>
+                                <br/>
                                 <button ng-click="sim.go()">Simulate</button>
+                                <ul ng-repeat="err in sim.errors">
+                                    <li>{{err}}</li>
+                                </ul>
+                                <simulation-result ng-show="sim.showResult" result="sim.simResult"></simulation-result>
                             </div>
                         </section>
                     </uib-tab>
@@ -108,8 +107,9 @@
                 <p>Alpha version. Not all features are implemented</p>
                 <p>{{aside.statusText}}</p>
                 <div ng-if="aside.isStorageAvailable">
-                    <button ng-click="aside.saveSetup()">Save to local storage</button>
-                    <button ng-click="aside.loadSetup()" ng-enabled="aside.loadActive">Load from local storage</button>
+                    Hint: click save to save setup in local storage (setup will be restored next time if you will use same browser)
+                    <button ng-click="aside.saveSetup()">Save</button>
+                    <button ng-click="aside.loadSetup()" ng-enabled="aside.loadActive">Load</button>
                 </div>
             </aside>
 
@@ -120,11 +120,11 @@
 
     <div class="footer-container">
         <footer class="wrapper">
-            <h3>v 0.1.8 - for merchant version 2.23 (2017-10-29)</h3>
+            <h3>v 0.2.1 - for merchant version 2.23 (2017-11-02)</h3>
         </footer>
     </div>
 
-    <script src="app.e8f00c7501597ec425e8.js"></script>
+    <script src="app.9c59f8495d85422d3196.js"></script>
     
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

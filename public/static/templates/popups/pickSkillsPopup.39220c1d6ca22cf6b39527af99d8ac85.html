@@ -1,0 +1,6 @@
+<p class="ngdialog-message">Setup skills for {{ngDialogData.hero.name}} ({{ngDialogData.scope.totalAp}} / 20 AP used)</p>
+<skills-picker hero="ngDialogData.hero" initial-skills="ngDialogData.scope.initialSkills" skills-changed="ngDialogData.scope.skillsChanged(skills, totalAp)"></skills-picker>    
+<div class="ngdialog-buttons ">
+    <button class="ngdialog-button ngdialog-button-primary" ng-click="confirm(ngDialogData.scope)">Confirm</button>
+    <button class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">Cancel</button>
+</div>

@@ -1,0 +1,16 @@
+<h3 >Pick hero:</h3>
+<div class="ngdialog-message">
+    <span ng-if="ngDialogData.heroes.length == 0">No heroes available</span>
+    <div ng-if="ngDialogData.heroes.length > 0" ng-repeat="hero in ngDialogData.heroes">
+        <hr/>
+        <div>
+            <span class="ico-heroes" ng-class="hero.icon"></span>
+            <span class="v-align-super">{{hero.name}} - lvl {{hero.level}}</span>
+            <hero-stats data="hero"></hero-stats>
+            <button ng-click="confirm(hero)">Pick</button>
+        </div>
+    </div>
+</div>
+<div class="ngdialog-buttons ">
+    <button class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">Cancel</button>
+</div>

@@ -1,0 +1,7 @@
+<h3 >Enter your hero stats</h3>
+<div class="ngdialog-message">
+    <hero-stats-editable hero="ngDialogData.stats"></hero-stats-editable>
+</div>
+<div class="ngdialog-buttons ">
+    <button class="ngdialog-button ngdialog-button-primary" ng-click="confirm(ngDialogData.stats)">{{ ngDialogData.isEdit ? "Save" : "Add"}}</button>
+</div>
