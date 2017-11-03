@@ -1,0 +1,41 @@
+<span ng-class="enemy.data.icon" class="ico-enemy"></span>
+<span class="v-align-super">{{enemy.data.name}}</span>
+<table>
+    <tbody>
+        <tr>
+            <td>Hp : {{enemy.data.hp}}</td>
+            <td>Atk : {{enemy.data.atk}}</td>
+        </tr>
+        <tr>
+            <td>Def : {{enemy.data.def}} ({{enemy.percentArmorFunc(enemy.data.def) | number:2}} %)</td>
+            <td>M.Atk : {{enemy.data.matk}} </td>
+        </tr>
+        <tr>
+            <td>M.Def : {{enemy.data.mdef}} ({{enemy.percentArmorFunc(enemy.data.mdef) | number:2}} %)</td>
+            <td>Eva : {{enemy.data.eva}}</td>
+        </tr>
+    </tbody>
+</table>
+<div>Quest size: {{enemy.data.partySize}}</div>
+
+<table class='quest-loot-drops-table'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan='2'>
+                Attack list information for {{enemy.data.name}}.
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr ng-repeat="ability in enemy.data.attackList track by $index">
+            <td>{{ability}}</td>
+            <td>{{enemy.getAbilityDescription(ability)}}</td>
+        </tr>
+    </tbody>
+</table>

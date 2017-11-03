@@ -1,0 +1,29 @@
+{{ctrl.hero.name}} <span ng-if="ctrl.showPosition">(position {{ctrl.hero.position}})</span> stats
+<ul>
+    <li>
+        Hp loss -
+        <b>{{ctrl.hero.getHpLoss()}}</b>
+    </li>
+    <li>
+        Damage dealt -
+        <b>{{ctrl.hero.statistic.pdmgDeal}}</b> atk
+        <b>{{ctrl.hero.statistic.mdmgDeal}}</b> matk
+        (<b>{{ctrl.hero.statistic.pdmgDeal + ctrl.hero.statistic.mdmgDeal}} total</b>)
+    </li>
+    <li>
+        Damage taken -
+        <b>{{ctrl.hero.statistic.pdmgTaken}}</b> atk
+        <b>{{ctrl.hero.statistic.mdmgTaken}}</b> matk
+        (<b>{{ctrl.hero.statistic.pdmgTaken + ctrl.hero.statistic.mdmgTaken}} total</b>)
+    </li>
+    <li>
+        Hits -
+        <b>{{ctrl.hero.statistic.hits}} / {{ctrl.hero.statistic.total}} ({{ctrl.hero.statistic.getHitPercent()
+            | number : 2}} %)</b>
+    </li>
+    <li>
+        Crits -
+        <b>{{ctrl.hero.statistic.crits}} / {{ctrl.hero.statistic.hits}} ({{ctrl.hero.statistic.getCritPercent()
+            | number : 2}} %)</b>
+    </li>
+</ul>
