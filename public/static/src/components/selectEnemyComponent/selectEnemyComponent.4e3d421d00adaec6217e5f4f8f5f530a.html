@@ -1,0 +1,18 @@
+
+<ui-select ng-model="ec.selected" theme="select2" ng-disabled="ec.disabled" skip-focusser="true"
+        style="min-width: 320px;" ng-change="ec.onChange()">
+    <ui-select-match placeholder="Select quest...">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="enemy in ec.data 
+    | filter: { name : $select.search }">
+        <span ng-class="enemy.icon" class="ico-enemy"></span>
+        <div style="display:inline-block;vertical-align: super;">
+            <span ng-bind-html="enemy.name | highlight: $select.search"></span>
+            <small>                                    
+                tier: <span ng-bind-html="''+enemy.region"></span>
+            </small>
+        </div>
+    </ui-select-choices>
+</ui-select>
+<div ng-if="!ec.hideInfo">      
+    <enemy-data data="ec.selected"></enemy-data>
+</div>
