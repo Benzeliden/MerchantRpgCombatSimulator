@@ -1,5 +1,5 @@
 
-<ui-select ng-model="ctrl.selected" theme="select2" ng-disabled="ctrl.disabled" 
+<ui-select ng-model="ctrl.selected" theme="select2" ng-disabled="ctrl.disabled" search-enabled="false"
         style="min-width: 320px;" ng-change="ctrl.onChange()">
     <ui-select-match placeholder="Select skill...">{{$select.selected.name}}</ui-select-match>
     <ui-select-choices 
