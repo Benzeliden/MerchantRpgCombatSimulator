@@ -18,7 +18,7 @@
 <section ng-if="smc.showInfo">
     <h2>Simulate</h2>
     <p>Hit chance: {{smc.getHitChance() | number:0}} %</p>
-    <button ng-click="smc.simulate()">Simulate</button>
+    <button class="btn btn-primary" ng-click="smc.simulate()">Simulate</button>
     <div ng-if="smc.showResult">
         <p ng-if="smc.bigResult.suggestedSkills">
             Suggested skills:
