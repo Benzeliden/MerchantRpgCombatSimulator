@@ -5,7 +5,7 @@
 </section>
 <section>
     <h2>Pick enemy</h2>
-    <select-enemy on-select="smc.handleEnemySelection($event)" hide-info="!smc.showInfo"></select-enemy>
+    <select-enemy on-select="smc.handleEnemySelection($event, $amount)" hide-info="!smc.showInfo"></select-enemy>
 </section>
 <section>
     <h2>Pick skills<span ng-hide="smc.autoPickSkills"> ({{smc.totalAp}} / 20 AP used)</span>:</h2>

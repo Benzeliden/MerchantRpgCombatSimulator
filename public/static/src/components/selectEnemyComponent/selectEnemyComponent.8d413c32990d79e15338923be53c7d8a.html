@@ -13,6 +13,11 @@
         </div>
     </ui-select-choices>
 </ui-select>
-<div ng-if="!ec.hideInfo">      
-    <enemy-data data="ec.selected"></enemy-data>
+<div ng-if="!ec.hideInfo">
+    <div ng-if="!ec.selected.isRare">
+        <label class="radio-inline"><input type="radio" name="optradio" ng-model="ec.questAmount" ng-change="ec.onChange()" value="1">x1</label>
+        <label class="radio-inline"><input type="radio" name="optradio" ng-model="ec.questAmount" ng-change="ec.onChange()" value="2">x2</label>
+        <label class="radio-inline"><input type="radio" name="optradio" ng-model="ec.questAmount" ng-change="ec.onChange()" value="3">x3</label>
+    </div>
+    <enemy-data data="ec.selected" amount="ec.questAmount"></enemy-data>
 </div>

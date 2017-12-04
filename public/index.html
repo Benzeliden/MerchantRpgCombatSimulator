@@ -11,7 +11,7 @@
     <!--[if lt IE 9]>
             <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
         <![endif]-->
-<link href="bundle.74899d938ced50d8fa5a.css" rel="stylesheet"></head>
+<link href="bundle.fb5ca66b1eb50f836b08.css" rel="stylesheet"></head>
 
 <body ng-app="myApp">
     <!--[if lt IE 8]>
@@ -72,7 +72,7 @@
 
                         <section ng-controller="simulationController as sim">
                             <h2>Explore enemies</h2>
-                            <select-enemy on-select="sim.handler($event)" hide-info="sim.hideInfo"></select-enemy>
+                            <select-enemy on-select="sim.handler($event, $amount)" hide-info="sim.hideInfo"></select-enemy>
                             <div ng-if="sim.currentlySelected != undefined">
                                 <h2>Setup party</h2>
                                 <party-picker party="sim.party" quest="sim.currentlySelected"></party-picker>
@@ -120,7 +120,7 @@
 
     <div class="footer-container">
         <footer class="wrapper">
-            <h3>v 0.2.4 - for merchant version 2.23</h3>
+            <h3>v 0.2.5 - for merchant version 2.35 (live) and 2.351 (beta)</h3>
         </footer>
     </div>
 
@@ -134,6 +134,6 @@
         ga('send', 'pageview');      
     </script> 
     
-<script type="text/javascript" src="app.74899d938ced50d8fa5a.js"></script></body>
+<script type="text/javascript" src="app.fb5ca66b1eb50f836b08.js"></script></body>
 
 </html>
