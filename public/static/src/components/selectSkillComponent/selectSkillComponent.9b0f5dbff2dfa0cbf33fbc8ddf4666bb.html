@@ -1,0 +1,3 @@
+<select class="form-control col-sm-9" ng-options="skill.name + ' (' + skill.apCost + ' AP)' for skill in ctrl.skillList"
+    ng-model="ctrl.selected" ng-change="ctrl.onChange()">
+</select>

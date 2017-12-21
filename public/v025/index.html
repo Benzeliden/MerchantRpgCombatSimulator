@@ -1,0 +1,139 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>MerchantCalc - Combat calculator for mobile game Merchant</title>
+    <meta name="description" content="Combat calculator for mobile game Merchant">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--[if lt IE 9]>
+            <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
+        <![endif]-->
+<link href="bundle.fb5ca66b1eb50f836b08.css" rel="stylesheet"></head>
+
+<body ng-app="myApp">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <div class="header-container">
+        <header class="wrapper clearfix">
+            <h1 class="title">Merchant calculator</h1>
+            <!--
+                <nav>
+                    <ul>
+                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">nav ul li a</a></li>
+                    </ul>
+                </nav>
+                -->
+        </header>
+    </div>
+
+    <div class="main-container">
+        <div class="main wrapper clearfix">
+
+            <article ng-cloak>
+                <uib-tabset>
+                    <uib-tab heading="Solo mage">
+                        <solo-mage></solo-mage>
+                    </uib-tab>
+                    <uib-tab ng-hide="false" heading="Party simulation">
+
+                        <header>
+                            <h1>Setup stats</h1>
+                            <p>Please setup stats for your heroes</p>
+                        </header>
+                        <section ng-controller="setupController as set">
+                            <h2>Heroes ({{set.heroes.length}} / {{set.maxHeroCount}})</h2>
+                            <h3>Click on hero icon to add hero!</h3>
+
+                            <div class="animate-hide" ng-hide="set.heroes.length == set.maxHeroCount">
+                                <div class="hero-picker" ng-repeat="class in set.availableHeroes track by class.id" ng-click="set.addHero(class.id)" title="{{class.fullName}}">
+
+                                    <div class="ico-heroes" ng-class="class.icon"></div>
+                                </div>
+                            </div>
+
+                            <div class="animate-repeat" ng-repeat="hero in set.heroes">
+                                <hr/>
+                                <div>
+                                    <span class="ico-heroes" ng-class="hero.icon"></span>
+                                    <span class="v-align-super">{{hero.name}} - lvl {{hero.level}}</span>
+                                    <span class="v-align-super icon-pencil" ng-click="set.editHero(hero)"></span>
+                                    <span class="v-align-super icon-cross" ng-click="set.removeHero(hero.id)"></span>
+                                    <hero-stats data="hero"></hero-stats>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section ng-controller="simulationController as sim">
+                            <h2>Explore enemies</h2>
+                            <select-enemy on-select="sim.handler($event, $amount)" hide-info="sim.hideInfo"></select-enemy>
+                            <div ng-if="sim.currentlySelected != undefined">
+                                <h2>Setup party</h2>
+                                <party-picker party="sim.party" quest="sim.currentlySelected"></party-picker>
+                                <br/>
+                                <div class="animate-repeat" ng-repeat="partyHero in sim.party | filter: sim.heroExists">
+                                    <hr/>
+                                    <span class="ico-heroes" ng-class="partyHero.hero.icon"></span>
+                                    <span class="v-align-super">{{partyHero.hero.name}} - pos {{partyHero.position}}</span>                                    
+                                    <span class="v-align-super"><b>Skills:</b> {{partyHero.skillsStr}}</span>
+                                    <span class="v-align-super icon-pencil" ng-click="sim.editSkills(partyHero)"></span>
+                                    <span class="v-align-super icon-cross" ng-click="sim.removeHero(partyHero)"></span>
+                                </div>
+                                <br/>
+                                <button class="btn btn-primary" ng-click="sim.go()">Simulate</button>
+                                <button class="btn" ng-click="sim.goExtended()">Simulate (1000 times)</button>
+                                <ul ng-repeat="err in sim.errors">
+                                    <li>{{err}}</li>
+                                </ul>
+                                <simulation-result ng-show="sim.showResult" result="sim.simResult"></simulation-result>
+                            </div>
+                        </section>
+                    </uib-tab>
+                    <uib-tab heading="Changelog">
+                        <changelog></changelog>
+                    </uib-tab>
+                </uib-tabset>
+
+            </article>
+
+            <aside ng-controller="storageController as aside" ng-cloak>
+                <h3>Note</h3>
+                <p>Alpha version. Not all features are implemented</p>
+                <p>{{aside.statusText}}</p>
+                <div ng-if="aside.isStorageAvailable">
+                    Hint: click save to save setup in local storage (setup will be restored next time if you will use same browser)
+                    <button class="btn" ng-click="aside.saveSetup()">Save</button>
+                    <button class="btn" ng-click="aside.loadSetup()" ng-enabled="aside.loadActive">Load</button>
+                </div>
+            </aside>
+
+        </div>
+        <!-- #main -->
+    </div>
+    <!-- #main-container -->
+
+    <div class="footer-container">
+        <footer class="wrapper">
+            <h3>v 0.2.5 - for merchant version 2.35 (live) and 2.351 (beta)</h3>
+        </footer>
+    </div>
+
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');      
+        ga('create', 'UA-106154350-1', 'auto');
+        ga('send', 'pageview');      
+    </script> 
+    
+<script type="text/javascript" src="app.fb5ca66b1eb50f836b08.js"></script></body>
+
+</html>

@@ -1,0 +1,73 @@
+<header>
+    <h1>Setup stats</h1>
+    <p>Please setup stats for your heroes</p>
+    <div class="alert alert-warning">
+        <strong>Warning!</strong>
+        Pay attention to percent stats and passives.
+        <details>
+            <summary>More details</summary>
+            <p>With latest update (The Frozen Tome) % stats from passive, gear and buffs stacks additivelly.</p>
+            <h4>How to fill it correctly:</h4>
+            <div>Example: in game you have rogue with 1000 atk, Might passive and Radiant Fatalis Helm (18% atk).</div>
+            <div>Enter 1000 atk, select Might passive and enter 18 to atk% field.</div>
+            <div>
+                <strong>You will not see changes when you swap one passive to another or change atk% - you should change stats manually</strong>
+            </div>
+            If passives settings are skipped you will get wrong simulation results in following cases:
+            <ul>
+                <li>Mage - Magic Missiles</li>
+                <li>Berserker - Vicious Strike, Enrage</li>
+                <li>Bard - "Song of Courage", "Song of Defense" or "Peaceful Respite"</li>
+                <li>Warrior - Shield Slam</li>
+            </ul>
+        </details>
+    </div>
+</header>
+<section ng-controller="setupController as set">
+    <h2>Heroes ({{set.heroes.length}} / {{set.maxHeroCount}})</h2>
+    <h3>Click on hero icon to add hero!</h3>
+
+    <div class="animate-hide" ng-hide="set.heroes.length == set.maxHeroCount">
+        <div class="hero-picker" ng-repeat="class in set.availableHeroes track by class.id" ng-click="set.addHero(class.id)" title="{{class.fullName}}">
+
+            <div class="ico-heroes" ng-class="class.icon"></div>
+        </div>
+    </div>
+
+    <div class="animate-repeat" ng-repeat="hero in set.heroes">
+        <hr/>
+        <div>
+            <span class="ico-heroes" ng-class="hero.icon"></span>
+            <span class="v-align-super">{{hero.name}} - lvl {{hero.level}}</span>
+            <span class="v-align-super icon-pencil" ng-click="set.editHero(hero)"></span>
+            <span class="v-align-super icon-cross" ng-click="set.removeHero(hero.id)"></span>
+            <hero-stats data="hero"></hero-stats>
+        </div>
+    </div>
+</section>
+
+<section ng-controller="simulationController as sim">
+    <h2>Explore enemies</h2>
+    <select-enemy on-select="sim.handler($event, $amount)" hide-info="sim.hideInfo"></select-enemy>
+    <div ng-if="sim.currentlySelected != undefined">
+        <h2>Setup party</h2>
+        <party-picker party="sim.party" quest="sim.currentlySelected"></party-picker>
+        <br/>
+        <div class="animate-repeat" ng-repeat="partyHero in sim.party | filter: sim.heroExists">
+            <hr/>
+            <span class="ico-heroes" ng-class="partyHero.hero.icon"></span>
+            <span class="v-align-super">{{partyHero.hero.name}} - pos {{partyHero.position}}</span>
+            <span class="v-align-super">
+                <b>Skills:</b> {{partyHero.skillsStr}}</span>
+            <span class="v-align-super icon-pencil" ng-click="sim.editSkills(partyHero)"></span>
+            <span class="v-align-super icon-cross" ng-click="sim.removeHero(partyHero)"></span>
+        </div>
+        <br/>
+        <button class="btn btn-primary" ng-click="sim.go()">Simulate</button>
+        <button class="btn" ng-click="sim.goExtended()">Simulate (1000 times)</button>
+        <ul ng-repeat="err in sim.errors">
+            <li>{{err}}</li>
+        </ul>
+        <simulation-result ng-show="sim.showResult" result="sim.simResult"></simulation-result>
+    </div>
+</section>

@@ -1,0 +1,14 @@
+<h3>{{ctrl.result.resultText}}</h3>
+<ul>
+    <li>
+        Fight result -
+        <b>{{ctrl.result.resultText}}</b>. Grade -
+        <b>{{ctrl.result.grade}}</b>
+    </li>
+    <li>
+        Fight duration - {{ctrl.result.duration}} turns.
+    </li>
+    <li ng-repeat="hero in ctrl.result.heroes">
+        <hero-statistic hero="hero" show-position="ctrl.result.heroes.length > 1"></hero-statistic>
+    </li>
+</ul>

@@ -1,0 +1,44 @@
+<div style="display:inline-block">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <button ng-hide="picker.quest.partySize == 1 || picker.party[3] != undefined" ng-click="picker.callSelectHero(4)">4</button>
+                    <span ng-if="picker.party[3] != undefined" class="ico-heroes" ng-class="picker.party[3].hero.icon"></span>
+                </td>
+                <td>
+                    <button ng-hide="picker.quest.partySize == 1 || picker.party[0] != undefined" ng-click="picker.callSelectHero(1)">1</button>
+                    <span ng-if="picker.party[0] != undefined" class="ico-heroes" ng-class="picker.party[0].hero.icon"></span>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <button ng-hide="picker.quest.partySize == 1 || picker.party[4] != undefined" ng-click="picker.callSelectHero(5)">5</button>
+                    <span ng-if="picker.party[4] != undefined" class="ico-heroes" ng-class="picker.party[4].hero.icon"></span>
+                </td>
+                <td>
+                    <button ng-hide="picker.party[1] != undefined" ng-click="picker.callSelectHero(2)">{{picker.quest.partySize == 1 ? "hero" : "2"}}</button>
+                    <span ng-if="picker.party[1] != undefined" class="ico-heroes" ng-class="picker.party[1].hero.icon"></span>
+                </td>
+                <td>vs</td>
+                <td>
+                    <span ng-class="picker.quest.icon" class="ico-enemy"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button ng-hide="picker.quest.partySize == 1 || picker.party[5] != undefined" ng-click="picker.callSelectHero(6)">6</button>
+                    <span ng-if="picker.party[5] != undefined" class="ico-heroes" ng-class="picker.party[5].hero.icon"></span>
+                </td>
+                <td>
+                    <button ng-hide="picker.quest.partySize == 1 || picker.party[2] != undefined" ng-click="picker.callSelectHero(3)">3</button>
+                    <span ng-if="picker.party[2] != undefined" class="ico-heroes" ng-class="picker.party[2].hero.icon"></span>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
