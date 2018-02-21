@@ -1,0 +1,43 @@
+<h1>Crafter simulator</h1>
+<div class="row">
+    <div class="col-sm-6">
+        I have a crafter level
+    </div>
+    <div class="col-sm-6">
+        <input type="number" min="1" max="60" ng-model="cs.crafterLvl" ng-change="cs.recalc()" ng-model-options="{ debounce: 100 }" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        Who want to craft item level
+    </div>
+    <div class="col-sm-6">
+        <input type="number" min="1" max="60" ng-model="cs.itemLvl" ng-change="cs.recalc()" ng-model-options="{ debounce: 100 }" />
+    </div>
+</div>
+<div ng-if="cs.error" class="alert alert-danger">
+    {{cs.error}}
+</div>
+<div ng-if="cs.result">
+    Result:
+    <ul>
+        <li>Final grade: {{cs.result.grade}}</li>
+        <li>Suffix chance: {{cs.result.suffixChance}}</li>
+        <li>Prefix chance: {{cs.result.prefixChance}} <span ng-if="cs.result.grade != 'S'">(rolling prefix can improve grade)</span> </li>
+    </ul>
+
+    Prefixes chances (on successfull roll):
+    <ul>
+        <li ng-repeat="pref in cs.prefixData | limitTo: cs.result.lastPrefixNum">
+            <b>{{pref.name}}</b> ({{pref.stats}}) - weight {{pref.weight}} (<b>{{100 * pref.weight / cs.result.prefixTotalW | number:2}}</b>  %)
+        </li>
+    </ul>
+    
+    Suffixes chances (on successfull roll):
+    <ul>
+        <li ng-repeat="suff in cs.suffixData | limitTo: cs.result.lastSuffixNum">
+            <b>{{suff.name}}</b> - weight {{suff.weight}} (<b>{{100 * suff.weight / cs.result.suffixTotalW | number:2}}</b>  %)
+        </li>
+    </ul>
+    
+</div>
