@@ -1,0 +1,21 @@
+<h3>{{ctrl.result.resultText}}</h3>
+<ul>
+    <li>
+        Fight result -
+        <b>{{ctrl.result.resultText}}</b>. Grade -
+        <b>{{ctrl.result.grade}}</b>
+    </li>
+    <li>
+        Fight duration - {{ctrl.result.duration}} turns. 
+        <span ng-if="ctrl.result.timePerGrade == undefined">Time: <b>{{ctrl.result.time | timeFilter}}</b></span>
+        <span ng-if="ctrl.result.timePerGrade != undefined">Average Time: 
+            <span ng-repeat="timeResult in ctrl.result.timePerGrade">
+                    <b>{{timeResult.time | timeFilter}}</b> ({{timeResult.grade}})
+            </span>
+        </span>
+        <span ng-if="ctrl.result.speedBonus > 0">with {{ctrl.result.speedBonus}} % speed bonus</span>
+    </li>
+    <li ng-repeat="hero in ctrl.result.heroes">
+        <hero-statistic hero="hero" show-position="ctrl.result.heroes.length > 1"></hero-statistic>
+    </li>
+</ul>
