@@ -6,6 +6,11 @@
         <b>{{ctrl.hero.getHpLoss()}}</b>
     </li>
     <li>
+        Damage per turn - 
+        <b ng-if="!ctrl.hero.isAgregated">{{ctrl.hero.statistic.dpt | number : 2}}</b>
+        <b ng-if="ctrl.hero.isAgregated">{{ctrl.hero.statistic.dpt}} (Average {{ctrl.hero.statistic.avgDpt}})</b>
+    </li>
+    <li>
         Damage dealt -
         <b>{{ctrl.hero.statistic.pdmgDeal}}</b> atk
         <b>{{ctrl.hero.statistic.mdmgDeal}}</b> matk (
