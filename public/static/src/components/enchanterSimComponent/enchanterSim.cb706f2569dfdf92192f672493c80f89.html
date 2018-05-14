@@ -1,0 +1,46 @@
+<h1>Enchanter simulator</h1>
+<div class="row">
+    <div class="col-sm-6">
+        I have a enchanter level
+    </div>
+    <div class="col-sm-6">
+        <input type="number" min="1" max="60" ng-model="es.crafterLvl" ng-change="es.recalc()" ng-model-options="{ debounce: 100 }"
+        />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        Who want to enchant item level
+    </div>
+    <div class="col-sm-6">
+        <input type="number" min="1" max="60" ng-model="es.itemLvl" ng-change="es.recalc()" ng-model-options="{ debounce: 100 }"
+        />
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        Item grade:
+    </div>
+    <div class="col-sm-6">
+        <select ng-model="es.grade" ng-change="es.recalc()">
+            <option value="5">S</option>
+            <option value="4">A</option>
+            <option value="3">B</option>
+            <option value="2">C</option>
+            <option value="1">D</option>
+        </select>
+    </div>
+</div>
+<div ng-if="es.result">
+    Improve grade result:
+    <ul>
+        <li>Attempts: {{es.result.attempts}}</li>
+        <li>Crystal cost: {{es.result.crystalCost}}</li>
+        <li>Pattern: {{es.result.pattern}}</li>
+        <li>Cost pattern: {{es.result.crystalPattern}}</li>
+    </ul>
+
+</div>
+<p class="alert alert-info">Credits to
+    <strong>Arshellan</strong> for initial implementation.
+</p>
