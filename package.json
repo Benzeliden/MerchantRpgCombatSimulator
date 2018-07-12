@@ -12,6 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "gzipme": "^0.1.1",
-    "node-static": "^0.7.9"
+    "node-static": "^0.7.10"
   }
 }
