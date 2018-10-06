@@ -18,6 +18,8 @@ require('http').createServer(function (request, response) {
     }).resume();
 }).listen(port);
 
+console.log("server started on port", port)
+
 function gzipPrep(startPath) {
     var gzipme = require('gzipme')
     var fs = require('fs')
